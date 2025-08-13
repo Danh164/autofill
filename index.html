@@ -8,12 +8,12 @@
     <meta charset="UTF-8" />
     <meta name=" viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv=" X-UA-Compatible" content="ie=edge" />
-    <link href="/style.css?v=4.61" rel="stylesheet" />
-    <script src="/jQuery-2.2.0.min.js"> </script>
-    <script src="/jquery.datetimepicker.full.js"></script>
-    <link href="/jquery.datetimepicker.min.css" rel="stylesheet" />
-    <link rel=" stylesheet" href="/jquery-ui.css" />
-    <script src="/jquery-ui.js"> </script>
+    <link href="./style.css?v=4.61" rel="stylesheet" />
+    <script src="./jQuery-2.2.0.min.js"> </script>
+    <script src="./jquery.datetimepicker.full.js"></script>
+    <link href="./jquery.datetimepicker.min.css" rel="stylesheet" />
+    <link rel=" stylesheet" href="./jquery-ui.css" />
+    <script src="./jquery-ui.js"> </script>
     <style>
         @font-face {
             font-family: myFirstFont;
@@ -85,7 +85,7 @@
             text-align: center;
         }
     </style>
-    <script src="/qrcode.min.js"> </script>
+    <script src="./qrcode.min.js"> </script>
     <script>
         function OpenThongBao() {
             $("#dvThongBao").fadeIn("normal");
@@ -118,7 +118,7 @@
                     }
                 }
             }
-            xmlhttp.open("GET", "/Ajax.aspx?Action=LoadCaptcha", true);
+            xmlhttp.open("GET", "./Ajax.aspx?Action=LoadCaptcha", true);
             xmlhttp.send();
         }
 
@@ -213,8 +213,8 @@
                                         }
                                     }
                                 }
-                                //xmlhttp.open("GET", "/Ajax.aspx?Action=DangKyThamDu&HoTen=" + HoTen + "&NgaySinh=" + NgaySinh + "&SoDienThoai=" + SoDienThoai + "&Email=" + Email + "&CCCD=" + CCCD + "&Captcha=" + Captcha, true);
-                                xmlhttp.open("GET", "/Ajax.aspx?Action=DangKyThamDu&idNgayBanHang=" + idNgayBanHang + "&idPhien=" + idPhien + "&HoTen=" + HoTen + "&NgaySinh_Ngay=" + NgaySinh_Ngay + "&NgaySinh_Thang=" + NgaySinh_Thang + "&NgaySinh_Nam=" + NgaySinh_Nam + "&SoDienThoai=" + SoDienThoai + "&Email=" + Email + "&CCCD=" + CCCD + "&Captcha=" + Captcha, true);
+                                //xmlhttp.open("GET", "./Ajax.aspx?Action=DangKyThamDu&HoTen=" + HoTen + "&NgaySinh=" + NgaySinh + "&SoDienThoai=" + SoDienThoai + "&Email=" + Email + "&CCCD=" + CCCD + "&Captcha=" + Captcha, true);
+                                xmlhttp.open("GET", "./Ajax.aspx?Action=DangKyThamDu&idNgayBanHang=" + idNgayBanHang + "&idPhien=" + idPhien + "&HoTen=" + HoTen + "&NgaySinh_Ngay=" + NgaySinh_Ngay + "&NgaySinh_Thang=" + NgaySinh_Thang + "&NgaySinh_Nam=" + NgaySinh_Nam + "&SoDienThoai=" + SoDienThoai + "&Email=" + Email + "&CCCD=" + CCCD + "&Captcha=" + Captcha, true);
                                 xmlhttp.send();
                             }
                             else {
@@ -277,7 +277,7 @@
                     }
                 }
             }
-            xmlhttp.open("GET", "/Ajax.aspx?Action=LoadPhien&idNgayBanHang=" + idNgayBanHang, true);
+            xmlhttp.open("GET", "./Ajax.aspx?Action=LoadPhien&idNgayBanHang=" + idNgayBanHang, true);
             xmlhttp.send();
         }
     </script>
@@ -311,7 +311,7 @@
                     style="padding: 10px;background: #ffffff;overflow: hidden;box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);border-radius: 10px;">
                     <div id="dvLeft" class="dvLeft">
                         <div>
-                            <img src="/Logo.jpg" style="width:100%" />
+                            <img src="./Logo.jpg" style="width:100%" />
                         </div>
                     </div>
                     <div class="dvRight">
@@ -454,7 +454,7 @@
                             ký </a>
                     </div>
                     <div id="dvLoading" style="text-align:center;padding: 10px; margin-top:5px; display:none">
-                        <!-- <img src="/Loading_icon.gif" style="width: 33px;" /> -->
+                        <!-- <img src="./Loading_icon.gif" style="width: 33px;" /> -->
                     </div>
                 </div>
                 <div id="dvTaoMaQR" style="display:none">
@@ -525,7 +525,7 @@
                 var NoiDungHienBenDuoi = MaThamDu;
                 $.ajax({
                     type: "POST",
-                    url: "/DangKy.aspx/GenQRImage",
+                    url: "./DangKy.aspx/GenQRImage",
                     contentType: "application/json; charset=utf-8",
                     dataType: "json",
                     data: "{GiaTri: '" + GiaTri + "',NoiDungHienBenDuoi: '" + NoiDungHienBenDuoi + "'}",
@@ -567,7 +567,7 @@
                         }
                     }
                 };
-                xmlhttp.open("GET", "/Ajax.aspx?Action=SendEmail&idPhien=" + idPhien + "&MaThamDu=" + MaThamDu, true);
+                xmlhttp.open("GET", "./Ajax.aspx?Action=SendEmail&idPhien=" + idPhien + "&MaThamDu=" + MaThamDu, true);
                 xmlhttp.send();
             }
         </script>
