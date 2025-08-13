@@ -1,0 +1,768 @@
+﻿.MySelect
+{
+    width: 100%;
+    border-radius: 15px;
+    padding: 8px;
+    font-size: 18px;
+    border: 1px solid #da253475;
+}
+.ConXacNhan{
+    padding: 10px 12px;
+    border-radius: 10px;
+    font-size: 20px;
+    line-height: 25px;
+    margin-top:0px;;                            
+}
+.LuotThamGia {
+    background: #f5e5b5;
+    padding: 5px 10px;
+    border-radius: 10px;
+    margin-top: 5px;
+    border: 2px dotted #FFC107;
+    text-align: center;
+    font-weight: bold;
+    font-size: 18px;
+    color: #070707;
+}
+
+.MyButton {
+    color: #ffffff;
+    border: none;
+    border-radius: 40px;
+    cursor: pointer;
+    padding: 12px 30px;
+    cursor: pointer;
+    /* border-width: 1px; */
+    /* border-radius: 2px; */
+    font-size: 15px;
+    font-weight: bold;
+    -webkit-box-shadow: 0px 10px 20px -6px rgba(0, 0, 0, 0.12);
+    -moz-box-shadow: 0px 10px 20px -6px rgba(0, 0, 0, 0.12);
+    box-shadow: 0px 10px 20px -6px rgba(0, 0, 0, 0.12);
+    background: #da2534;
+}
+
+    .MyButton:hover {
+        filter: brightness(130%);
+    }
+
+.login {
+    background: white;
+    padding: 16px;
+    position: fixed;
+    width: 600px;
+    margin: auto;
+    display: table;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    box-shadow: 0px 0px 16px #0000003d;
+    border-radius: 8px;
+    padding-top: 0;
+    /*margin-top: 16%!important;*/
+    background-image: -webkit-linear-gradient( 57deg, #88cd60 0%, #cbd7c4 100%, rgb(54 154 60) 100%);
+}
+/* The popup form - hidden by default */
+.form-container-close {
+    text-align: right;
+    margin-top: -10px;
+    margin-right: 0px;
+    /*height: 10px;*/
+}
+
+.form-popup {
+    display: none;
+    z-index: 999999;
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    background: rgb(0 0 0 / 43%);
+    top: 0px;
+    left: 0px;
+    overflow: auto;
+}
+/* Add styles to the form container */
+
+
+.ConScreen {
+    padding: 0px 3%;
+    /*overflow: hidden;*/
+}
+
+.PhanQua {
+    width: 100%;
+    cursor: pointer;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+    .PhanQua:hover {
+        filter: brightness(120%);
+    }
+
+.img1 {
+    height: 150px;
+    width: 150px;
+    opacity: 0.7;
+}
+
+    .img1:hover {
+        opacity: 1;
+    }
+
+
+/*desktop*/
+@media screen and (min-width: 1131px) {
+    .ImgDemNguoc
+    {
+       width: 33%;
+       margin-top:3.5%;
+    }
+    .TieuDe
+    {
+        font-weight: bold;
+        color: #383838;
+        font-size: 23px;
+        margin-bottom: 5px;
+        padding-left: 5px;
+        text-align: center;
+    }
+    .ConXacNhan{
+        padding: 10px 12px;
+        border-radius: 10px;
+        font-size: 20px;
+        line-height: 25px;
+        margin-top:0px;;                            
+    }
+    .ImgGif{
+        height:370px;
+    }
+    .dvLeft
+    {
+        /*float: left;
+        width: 100%;*/
+        /*padding: 10px 12px;
+        border-radius: 10px;
+        font-size: 20px;
+        line-height: 25px;
+        background: #f3f3f3d4;
+        box-shadow: rgb(255 193 7 / 37%) 0px 1px 4px;
+        margin-top:12px;*/
+    }
+    .dvRight
+    {
+        /*float: left;
+        width: 100%;*/
+        padding: 0px 20px;
+    }
+    .body {
+        /*background-image:url('../images/Desktop_nen.png');
+                background-size:cover;
+                background-repeat:no-repeat;*/
+        /*min-height:98.4vh;*/
+    }
+
+    .ConImgTrungThuong {
+        margin-top: -33px;
+    }
+
+    .ConFields {
+        padding: 0px 30%;
+        margin-top: 2%;
+    }
+
+    .dvField {
+        width: 47.8%;
+        display: inline-block;
+        text-align: center;
+        margin: 2px 5px;
+        margin-bottom: 5px;
+    }
+
+    .dvField1 {
+        width: 97.5%;
+        display: inline-block;
+        text-align: center;
+        margin-bottom: 12px;
+        padding: 0px 5px;
+    }
+
+    .txtField {
+        width: 96% !important;
+        display: inline-block;
+    }
+
+    .txtField1 {
+        width: 98% !important;
+        display: inline-block;
+    }
+
+    .form-close {
+        font-size: 16px;
+        position: relative;
+        top: 1px;
+        /* right: 20px; */
+        /*background: #ff00005c;*/
+        border: none;
+        color: white;
+        border-radius: 5px;
+        font-weight: bold;
+        /*padding: 3px 12px;*/
+        z-index: 10000;
+        width: 35px;
+        cursor: pointer;
+    }
+
+    .form-container {
+        margin: auto;
+        width: 550px;
+        margin-top: 9%;
+        border-radius: 5px;
+        background-color: white;
+        /*padding: 10px;*/
+        height: 330px;
+    }
+
+    .Logo {
+        text-align: left;
+    }
+
+    .ConGift {
+        width: 22%;
+        padding: 10px;
+        margin-bottom: 5px;
+        display: inline-grid;
+    }
+
+    .ConGift1 {
+        width: 16%;
+        padding: 10px;
+        margin-bottom: 5px;
+        display: inline-grid;
+    }
+
+    .ConGift2 {
+        width: 14%;
+        padding: 10px;
+        margin-bottom: 5px;
+        display: inline-grid;
+    }
+
+    .ConText {
+        margin: auto;
+        width: 600px;
+    }
+
+    .myTextBox {
+        width: 94%!important;
+        line-height: 0px;
+        padding: 9px 10px;
+        font-size: 18px;
+        background: #fff;
+        border: 1px solid #eeeeee;
+        color: #707070;
+        border-radius: 15px;
+        box-shadow: 0 0 0 0 transparent inset;
+        -webkit-transition: color .1s ease,border-color .1s ease;
+        transition: color .1s ease,border-color .1s ease;
+        margin: 0;
+        outline: 0;
+        -webkit-appearance: none;
+        text-align: left;
+        font-weight: bold;
+    }
+}
+/*iPad pro*/
+@media(max-width: 1130px) and (min-width: 769px) {
+    .ImgDemNguoc
+    {
+       width: 50%;
+       margin-top:15%;
+    }
+    .TieuDe
+    {
+        font-weight: bold;
+        color: #383838;
+        font-size: 23px;
+        margin-bottom: 5px;
+        padding-left: 5px;
+        text-align: center;
+    }
+    .ConXacNhan{
+        padding: 10px 12px;
+        border-radius: 10px;
+        font-size: 20px;
+        line-height: 25px;
+        margin-top:0px;;                            
+    }
+    .ImgGif{
+        height:370px;
+    }
+    .dvLeft
+    {
+        /*float:left;
+        width:50%;*/ 
+        /*padding: 10px 12px;
+        border-radius: 10px;
+        font-size: 20px;
+        line-height: 25px;
+        background: #f3f3f3d4;
+        box-shadow: rgb(255 193 7 / 37%) 0px 1px 4px;
+        margin-top: 35px;*/
+    }
+    .dvRight
+    {
+        /*float: left;
+        width: 45%;*/
+        padding: 0px 20px;
+    }
+    .body {
+        /*background-image:url('../images/Mobile_nen.png');
+                background-size:cover;
+                background-repeat:no-repeat;*/
+        min-height: 100vh;
+        /*background-size: 100% 100% !important;*/
+        background-size: 100vw auto !important;
+        background-color: #f3f3f3 !important;
+        background-repeat: no-repeat !important;
+    }
+
+    .ConImgTrungThuong {
+        margin-top: -36px;
+    }
+
+    .ConFields {
+        padding: 0px 20%;
+        margin-top: 3%;
+    }
+
+    .dvField {
+        width: 98%;
+        /*display: -webkit-inline-box;*/
+        text-align: center;
+        margin-bottom: 5px;
+    }
+
+    .dvField1 {
+        width: 98%;
+        /*display: -webkit-inline-box;*/
+        text-align: center;
+        margin-bottom: 12px;
+        /*padding: 0px 5px;*/
+    }
+
+    .txtField {
+        width: 99% !important;
+        display: inline-block;
+    }
+
+    .txtField1 {
+        width: 99% !important;
+        display: inline-block;
+    }
+
+    .form-container {
+        margin: auto;
+        width: 90%;
+        margin-top: 25%;
+        border-radius: 3px;
+        background-color: white;
+        /*padding: 10px;*/
+        height: 330px;
+    }
+
+    .form-close {
+        font-size: 20px;
+        position: relative;
+        top: 0px;
+        /* right: 20px; */
+        /*background: #ff00005c;*/
+        border: none;
+        color: white;
+        border-radius: 3px;
+        font-weight: bold;
+        /*padding: 3px 12px;*/
+        z-index: 10000;
+        width: 40px;
+        cursor: pointer;
+    }
+
+    .Logo {
+        text-align: center;
+    }
+
+    .ConGift {
+        width: 30%;
+        padding: 5px;
+        margin-bottom: 5px;
+        display: inline-grid;
+    }
+
+    .ConGift1 {
+        width: 30%;
+        padding: 5px;
+        margin-bottom: 5px;
+        display: inline-grid;
+    }
+
+    .ConGift2 {
+        width: 30%;
+        padding: 5px;
+        margin-bottom: 5px;
+        display: inline-grid;
+    }
+
+    .ConText {
+        margin: auto;
+        width: 100%;
+    }
+
+    .myTextBox {
+        width: 100%;
+        line-height: 0px;
+        padding: 9px 10px;
+        font-size: 18px;
+        background: #fff;
+        border: 2px solid #b7965e;
+        color: #b7965e;
+        border-radius: 15px;
+        box-shadow: 0 0 0 0 transparent inset;
+        -webkit-transition: color .1s ease,border-color .1s ease;
+        transition: color .1s ease,border-color .1s ease;
+        margin: 0;
+        outline: 0;
+        -webkit-appearance: none;
+        text-align: left;
+        font-weight: bold;
+    }
+}
+/*iPad mini*/
+@media(max-width: 768px) and (min-width: 767px) {
+    .ImgDemNguoc
+    {
+       width: 70%;
+       margin-top:15%;
+    }
+    .TieuDe
+    {
+        font-weight: bold;
+        color: #383838;
+        font-size: 23px;
+        margin-bottom: 5px;
+        padding-left: 5px;
+        text-align: center;
+    }
+    .ConXacNhan{
+        padding: 10px 12px;
+        border-radius: 10px;
+        font-size: 20px;
+        line-height: 25px;
+        margin-top:15px;;                            
+    }
+    .ImgGif{
+        width:70%;
+    }
+    .dvLeft
+    {
+        /*float:left;*/
+        /*width:100%;*/ 
+        /*padding: 10px 14px;
+        border-radius: 10px;
+        font-size: 20px;
+        line-height: 25px;
+        margin-top: 250px;
+        background: #f3f3f3d4;
+        box-shadow: rgb(255 193 7 / 37%) 0px 1px 4px;*/
+    }
+    .dvRight
+    {
+        /*float: left;*/
+        /*width: 98%;*/
+        padding: 5px 10px;
+    }
+    .body {
+        /*background-image:url('../images/Mobile_nen.png');
+                background-size:cover;
+                background-repeat:no-repeat;*/
+        min-height: 100vh;
+        /*background-size: 100% 100% !important;*/
+        background-size: 100vw auto !important;
+        background-color: #f3f3f3 !important;
+        background-repeat: no-repeat !important;
+    }
+
+    .ConImgTrungThuong {
+        margin-top: -36px;
+    }
+
+    .ConFields {
+        padding: 0px 0%;
+        margin-top: 3%;
+    }
+
+    .dvField {
+        width: 100%;
+        /*display: -webkit-inline-box;*/
+        text-align: center;
+        margin-bottom: 5px;
+    }
+
+    .dvField1 {
+        width: 100%;
+        /*display: -webkit-inline-box;*/
+        text-align: center;
+        margin-bottom: 5px;
+        /*padding: 0px 5px;*/
+    }
+
+    .txtField {
+        width: 99% !important;
+        display: inline-block;
+    }
+
+    .txtField1 {
+        width: 99% !important;
+        display: inline-block;
+    }
+
+    .form-container {
+        margin: auto;
+        width: 500px;
+        margin-top: 28%;
+        border-radius: 3px;
+        background-color: white;
+        /*padding: 10px;*/
+        height: 300px;
+    }
+
+    .form-close {
+        font-size: 20px;
+        position: relative;
+        top: 0px;
+        /* right: 20px; */
+        /*background: #ff00005c;*/
+        border: none;
+        color: white;
+        border-radius: 3px;
+        font-weight: bold;
+        /*padding: 3px 12px;*/
+        z-index: 10000;
+        width: 40px;
+        cursor: pointer;
+    }
+
+    .Logo {
+        text-align: center;
+    }
+
+    .ConGift {
+        width: 30%;
+        padding: 5px;
+        margin-bottom: 5px;
+        display: inline-grid;
+    }
+
+    .ConGift1 {
+        width: 30%;
+        padding: 5px;
+        margin-bottom: 5px;
+        display: inline-grid;
+    }
+
+    .ConGift2 {
+        width: 30%;
+        padding: 5px;
+        margin-bottom: 5px;
+        display: inline-grid;
+    }
+
+    .ConText {
+        margin: auto;
+        width: 100%;
+    }
+
+    .myTextBox {
+        width: 100%;
+        line-height: 0px;
+        padding: 9px 10px;
+        font-size: 18px;
+        background: #fff;
+        border: 2px solid #b7965e;
+        color: #b7965e;
+        border-radius: 15px;
+        box-shadow: 0 0 0 0 transparent inset;
+        -webkit-transition: color .1s ease,border-color .1s ease;
+        transition: color .1s ease,border-color .1s ease;
+        margin: 0;
+        outline: 0;
+        -webkit-appearance: none;
+        text-align: left;
+        font-weight: bold;
+    }
+}
+/*iPhone*/
+@media(max-width: 766px) {
+    .ImgDemNguoc
+    {
+       width: 95%;
+       margin-top:15%;
+    }
+    .TieuDe
+    {
+        font-weight: bold;
+        color: #383838;
+        font-size: 23px;
+        margin-bottom: 5px;
+        padding-left: 5px;
+        text-align: center;
+    }
+    .ConXacNhan{
+        padding: 10px 0px;
+        border-radius: 10px;
+        font-size: 20px;
+        line-height: 25px;
+        margin-top:15px;;                            
+    }
+    .ImgGif{
+        width:95%;
+    }
+    .dvLeft
+    {
+        /*float:left;*/
+        /*width:100%*/; 
+        /*padding: 10px 14px;
+        border-radius: 10px;
+        font-size: 20px;
+        line-height: 25px;
+        margin-top: 160px;
+        background: #f3f3f3d4;
+        box-shadow: rgb(255 193 7 / 37%) 0px 1px 4px;*/
+    }
+    .dvRight
+    {
+        /*float: left;*/
+        /*width: 98%;*/
+        padding: 5px 10px;
+    }
+    .body {
+        /*background-image:url('../images/Mobile_nen.png');
+                background-size:cover;
+                background-repeat:no-repeat;*/
+        min-height: 100vh;
+        /*background-size: 100% 100% !important;*/
+        background-size: 100vw auto !important;
+        background-color: #f3f3f3 !important;
+        background-repeat: no-repeat !important;
+    }
+
+    .ConImgTrungThuong {
+        margin-top: -36px;
+    }
+
+    .ConFields {
+        padding: 0px 0%;
+        margin-top: 4%;
+        width: 100%;
+    }
+
+    .dvField {
+        width: 100%;
+        /*display: -webkit-inline-box;*/
+        text-align: center;
+        margin-bottom: 5px;
+    }
+
+    .dvField1 {
+        width: 100%;
+        /*display: -webkit-inline-box;*/
+        text-align: center;
+        margin-bottom: 5px;
+        /*padding: 0px 5px;*/
+    }
+
+    .txtField {
+        width: 99% !important;
+        display: inline-block;
+    }
+
+    .txtField1 {
+        width: 99% !important;
+        display: inline-block;
+    }
+
+    .form-container {
+        margin: auto;
+        width: 90%;
+        margin-top: 30%;
+        border-radius: 3px;
+        background-color: white;
+        /* padding: 10px; */
+        height: 250px;
+    }
+
+    .form-close {
+        font-size: 20px;
+        position: relative;
+        top: 0px;
+        /* right: 20px; */
+        /*background: #ff00005c;*/
+        border: none;
+        color: white;
+        border-radius: 3px;
+        font-weight: bold;
+        /*padding: 3px 12px;*/
+        z-index: 10000;
+        width: 40px;
+        cursor: pointer;
+    }
+
+    .Logo {
+        text-align: center;
+    }
+
+    .ConGift {
+        width: 30%;
+        padding: 5px;
+        margin-bottom: 5px;
+        display: inline-grid;
+    }
+
+    .ConGift1 {
+        width: 30%;
+        padding: 5px;
+        margin-bottom: 5px;
+        display: inline-grid;
+    }
+
+    .ConGift2 {
+        width: 30%;
+        padding: 5px;
+        margin-bottom: 5px;
+        display: inline-grid;
+    }
+
+    .ConText {
+        margin: auto;
+        width: 100%;
+    }
+
+    .myTextBox {
+        width: 90%!important;
+        line-height: 0px;
+        padding: 9px 10px;
+        font-size: 18px;
+        background: #fff;
+        border: 2px solid #b7965e;
+        color: #b7965e;
+        border-radius: 15px;
+        box-shadow: 0 0 0 0 transparent inset;
+        -webkit-transition: color .1s ease,border-color .1s ease;
+        transition: color .1s ease,border-color .1s ease;
+        margin: 0;
+        outline: 0;
+        -webkit-appearance: none;
+        text-align: left;
+        font-weight: bold;
+    }
+}
