@@ -571,6 +571,63 @@
                 xmlhttp.send();
             }
         </script>
+        <script>
+  // Dữ liệu mapping ngày -> danh sách phiên
+  const phienData = {
+    "35": [
+      { value: "3501", text: "Sáng 13/08/2025" },
+      { value: "3502", text: "Chiều 13/08/2025" }
+    ],
+    "36": [
+      { value: "3601", text: "Sáng 14/08/2025" },
+      { value: "3602", text: "Chiều 14/08/2025" }
+    ],
+    "37": [
+      { value: "3701", text: "Sáng 15/08/2025" },
+      { value: "3702", text: "Chiều 15/08/2025" }
+    ],
+    "38": [
+      { value: "3801", text: "Sáng 16/08/2025" },
+      { value: "3802", text: "Chiều 16/08/2025" }
+    ]
+  };
+
+  function renderPhienOptions(dateValue) {
+    const slPhien = document.getElementById("slPhien");
+    if (!slPhien) return;
+
+    // Xóa option cũ
+    slPhien.innerHTML = "";
+
+    // Nếu không chọn ngày
+    if (!dateValue || !phienData[dateValue]) {
+      const opt = document.createElement("option");
+      opt.value = "";
+      opt.textContent = "-- Chọn --";
+      slPhien.appendChild(opt);
+      return;
+    }
+
+    // Render danh sách phiên theo dateValue
+    phienData[dateValue].forEach(item => {
+      const opt = document.createElement("option");
+      opt.value = item.value;
+      opt.textContent = item.text;
+      slPhien.appendChild(opt);
+    });
+  }
+
+  // Gắn vào onchange của #slNgayBanHang
+  document.addEventListener("DOMContentLoaded", () => {
+    const slNgay = document.getElementById("slNgayBanHang");
+    if (slNgay) {
+      slNgay.addEventListener("change", () => {
+        setTimeout(function(){renderPhienOptions(slNgay.value)}, 500)
+      });
+    }
+  });
+</script>
+
     </form>
 </body>
 
