@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+    <title>
+        ĐĂNG KÝ THÔNG TIN POP-MART
+    </title>
+    <meta charset="UTF-8" />
+    <meta name=" viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv=" X-UA-Compatible" content="ie=edge" />
+    <link href="./style.css?v=4.61" rel="stylesheet" />
+    <script src="./jQuery-2.2.0.min.js"> </script>
+    <script src="./jquery.datetimepicker.full.js"></script>
+    <link href="./jquery.datetimepicker.min.css" rel="stylesheet" />
+    <link rel=" stylesheet" href="./jquery-ui.css" />
+    <script src="./jquery-ui.js"> </script>
+    <style>
+        @font-face {
+            font-family: myFirstFont;
+            src: url(/fonts/MyFont.otf);
+        }
+
+        * {
+            font-family: myFirstFont !important;
+        }
+
+        .MyCaptcha {
+            background-image: url(images/bgCaptcha_v2.jpg);
+            background-size: 100% 100%;
+            text-align: center;
+            padding: 8px 3px;
+            border-radius: 10px;
+            margin-top: -45px;
+            position: absolute;
+            width: 90px;
+            font-size: 20px;
+            font-weight: bold;
+        }
+    </style>
+    <style>
+        ::placeholder {
+            color: #b4b4b4;
+            opacity: 1;
+            /* Firefox */
+        }
+
+        #dvTrungThuong.visible {
+            display: block;
+            animation: gb-popup-scale-tada 1.0s both;
+        }
+
+        @keyframes gb-popup-scale-tada {
+            0% {
+                transform: scale3d(1, 1, 1);
+            }
+
+            10%,
+            20% {
+                transform: scale3d(.9, .9, .9) rotate3d(0, 0, 1, -3deg);
+            }
+
+            30%,
+            50%,
+            70%,
+            90% {
+                transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, 3deg);
+            }
+
+            40%,
+            60%,
+            80% {
+                transform: scale3d(1.1, 1.1, 1.1) rotate3d(0, 0, 1, -3deg);
+            }
+
+            100% {
+                transform: scale3d(1, 1, 1);
+            }
+        }
+    </style>
+    <style>
+        #qrcode {
+            width: 100%;
+            height: 120px;
+            margin-top: 0px;
+            text-align: center;
+        }
+    </style>
+    <script src="./qrcode.min.js"> </script>
+    <script>
+        function OpenThongBao() {
+            $("#dvThongBao").fadeIn("normal");
+        }
+        function CloseThongBao() {
+            $("#dvThongBao").hide();
+            LoadCaptcha();
+        }
+    </script>
+    <script>
+        window.onload = function () {
+            LoadCaptcha();
+        }
+        function LoadCaptcha() {
+            var xmlhttp;
+            if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
+                xmlhttp = new XMLHttpRequest();
+            }
+            else {// code for IE6, IE5
+                xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+            }
+            xmlhttp.onreadystatechange = function () {
+                if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                    if (xmlhttp.responseText.trim() != "") {
+
+                        //var html = "<img src='" + xmlhttp.responseText.trim() + "' style='height: 40px;border-radius: 10px; margin-top:-25px' />";
+                        var html = xmlhttp.responseText.trim();
+
+                        $("#dvCaptcha").html(html);
+                    }
+                }
+            }
+            xmlhttp.open("GET", "./Ajax.aspx?Action=LoadCaptcha", true);
+            xmlhttp.send();
+        }
+
+        function isNumeric(str) {
+            if (typeof str != "string") return false // we only process strings!
+            return !isNaN(str) && // use type coercion to parse the _entirety_ of the string (`parseFloat` alone does not do this)...
+                !isNaN(parseFloat(str)) // ...and ensure strings of whitespace fail
+        }
+        function validateEmail(email) {
+            var re = /\S+@\S+\.\S+/;
+            return re.test(email);
+        }
+
+        var ListValues = "";
+        function DangKyThamDu() {
+            var DongY = $("#ckbDongY").prop('checked');;
+            //alert(DongY);
+            if (DongY == true) {
+                var idNgayBanHang = $("#slNgayBanHang").val().trim().replaceAll("|||", "");
+                var idPhien = $("#slPhien").val().trim().replaceAll("|||", "");
+                var HoTen = $("#txtHoTen").val().trim().replaceAll("|||", "");
+                //var NgaySinh = $("#txtField4").val().trim().replaceAll("|||", "");
+                var NgaySinh_Ngay = $("#txtNgaySinh_Ngay").val().trim().replaceAll("|||", "");
+                var NgaySinh_Thang = $("#txtNgaySinh_Thang").val().trim().replaceAll("|||", "");
+                var NgaySinh_Nam = $("#txtNgaySinh_Nam").val().trim().replaceAll("|||", "");
+                var SoDienThoai = $("#txtSoDienThoai").val().trim().replaceAll("|||", "");
+                var Email = $("#txtEmail").val().trim().replaceAll("|||", "");
+                var CCCD = $("#txtCCCD").val().trim().replaceAll("|||", "");
+                var Captcha = $("#txtCaptcha").val().trim();
+                //if (HoTen != "" && NgaySinh != "" && SoDienThoai != "" && Email != "" && CCCD != "" && Captcha != "") {
+                if (idNgayBanHang != "" && idPhien != "" && HoTen != "" && NgaySinh_Ngay != "" && NgaySinh_Thang != "" && NgaySinh_Nam != "" && SoDienThoai != "" && Email != "" && CCCD != "" && Captcha != "") {
+                    if (HoTen.length >= 3) {
+                        var CheckSoDienThoai = false;
+                        if (isNumeric(SoDienThoai) == true) {
+                            var vnf_regex = /((09|03|07|08|05)+([0-9]{8})\b)/g;
+                            //alert(vnf_regex.test(SoDienThoai) + ',' + vnf_regex_GhepDoi.test(SoDienThoai));
+                            if (vnf_regex.test(SoDienThoai) == true) {
+                                CheckSoDienThoai = true;
+                            }
+                        }
+                        if (CheckSoDienThoai == true) {
+
+                            if (validateEmail(Email)) {
+                                $("#dvDangKyThamDu").css("display", "none");
+                                $("#dvLoading").css("display", "");
+
+                                //alert(ListValues);
+                                var xmlhttp;
+                                if (window.XMLHttpRequest) {
+                                    // code for IE7+, Firefox, Chrome, Opera, Safari
+                                    xmlhttp = new XMLHttpRequest();
+                                } else {
+                                    // code for IE6, IE5
+                                    xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+                                }
+                                xmlhttp.onreadystatechange = function () {
+                                    if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                                        $("#dvDangKyThamDu").css("display", "");
+                                        $("#dvLoading").css("display", "none");
+
+                                        var result = xmlhttp.responseText.trim();
+                                        if (result.includes("!!!True|~~|")) {
+                                            //alert("Đăng ký tham dự thành công!");
+                                            var arrResult = result.split("|~~|");
+                                            var MaThamDu = arrResult[3].trim();
+
+                                            var htmlKQ = "";
+                                            htmlKQ += "<div style='font-weight: bold;color: #329a36;font-size: 23px;margin-bottom: 5px;padding-left: 5px;text-align:center; margin-top:15px'>ĐĂNG KÝ THÀNH CÔNG</div>"
+                                            htmlKQ += arrResult[2].trim();
+                                            $("#dvConXacNhan_Content").html(htmlKQ);
+                                            $("#txtQRCode").val(MaThamDu);
+                                            GenQRImage(idPhien, MaThamDu);
+                                            // $("#txtQRCode").val(MaThamDu);
+                                            //$("#qrcode").html("");
+                                            //makeQR(document.querySelector('#txtQRCode').value, 'qr-code.png');
+                                            //$("#dvTaoMaQR").css("display","");
+                                        }
+                                        else {
+                                            if (result != "") {
+                                                if (result.includes("Captcha")) {
+                                                    LoadCaptcha();
+                                                }
+                                                $("#dvNoiDungThongBao").html(result);
+                                                OpenThongBao();
+                                            }
+                                            else {
+                                                var htmlTB = "<div>Có vấn đề xảy ra. Bạn vui lòng thử lại!</div>";
+                                                htmlTB += "<div style='font-style:italic;margin-top: 5px;'>Something went wrong. Please try again!</div>";
+                                                $("#dvNoiDungThongBao").html(htmlTB);
+                                                OpenThongBao();
+                                            }
+                                        }
+                                    }
+                                }
+                                //xmlhttp.open("GET", "./Ajax.aspx?Action=DangKyThamDu&HoTen=" + HoTen + "&NgaySinh=" + NgaySinh + "&SoDienThoai=" + SoDienThoai + "&Email=" + Email + "&CCCD=" + CCCD + "&Captcha=" + Captcha, true);
+                                xmlhttp.open("GET", "./Ajax.aspx?Action=DangKyThamDu&idNgayBanHang=" + idNgayBanHang + "&idPhien=" + idPhien + "&HoTen=" + HoTen + "&NgaySinh_Ngay=" + NgaySinh_Ngay + "&NgaySinh_Thang=" + NgaySinh_Thang + "&NgaySinh_Nam=" + NgaySinh_Nam + "&SoDienThoai=" + SoDienThoai + "&Email=" + Email + "&CCCD=" + CCCD + "&Captcha=" + Captcha, true);
+                                xmlhttp.send();
+                            }
+                            else {
+                                var htmlTB = "<div>Email không hợp lệ!</div>";
+                                htmlTB += "<div style='font-style:italic;margin-top: 5px;'>Invalid email!</div>";
+                                $("#dvNoiDungThongBao").html(htmlTB);
+                                OpenThongBao();
+                            }
+
+                        } else {
+                            var htmlTB = "<div>Số điện thoại không hợp lệ!</div>";
+                            htmlTB += "<div style='font-style:italic;margin-top: 5px;'>Invalid phone number!</div>";
+                            $("#dvNoiDungThongBao").html(htmlTB);
+                            OpenThongBao();
+                        }
+                    }
+                    else {
+                        var htmlTB = "<div>Họ tên không hợp lệ!</div>";
+                        htmlTB += "<div style='font-style:italic;margin-top: 5px;'>Invalid name!</div>";
+                        $("#dvNoiDungThongBao").html(htmlTB);
+                        OpenThongBao();
+                    }
+                }
+                else {
+                    var htmlTB = "<div>Bạn chưa nhập đủ thông tin bắt buộc!</div>";
+                    htmlTB += "<div style='font-style:italic;margin-top: 5px;'>You have not entered all required information!</div>";
+                    $("#dvNoiDungThongBao").html(htmlTB);
+                    OpenThongBao();
+                }
+            }
+            else {
+                var htmlTB = "<div>Bạn chưa đồng ý các điều khoản & điều kiện của chương trình!</div>";
+                htmlTB += "<div style='font-style:italic;margin-top: 5px;'>You have not commented on the terms and conditions of the program!</div>";
+                $("#dvNoiDungThongBao").html(htmlTB);
+                OpenThongBao();
+            }
+        }
+
+        function LoadPhien() {
+            var idNgayBanHang = $("#slNgayBanHang").val();
+            var xmlhttp;
+            if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
+                xmlhttp = new XMLHttpRequest();
+            }
+            else {// code for IE6, IE5
+                xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+            }
+            xmlhttp.onreadystatechange = function () {
+                if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                    var arrKQ = xmlhttp.responseText.trim().split("||@@||");
+                    if (arrKQ.length == 2) {
+                        $("#slPhien").html(arrKQ[0].trim());
+                        //$("#slPhien").val("");
+                        $("#dvGhiChuNgayBanHang").html(arrKQ[1].trim());
+                    }
+                    else {
+                        $("#slPhien").html("");
+                        //$("#slPhien").val("");
+                        $("#dvGhiChuNgayBanHang").html("");
+                    }
+                }
+            }
+            xmlhttp.open("GET", "./Ajax.aspx?Action=LoadPhien&idNgayBanHang=" + idNgayBanHang, true);
+            xmlhttp.send();
+        }
+    </script>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-T72KCLV5JP"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-T72KCLV5JP');
+    </script>
+</head>
+
+<body class="body" style="background: #f2f2f2;">
+    <form method="post" action="./popmart" id="ctl01">
+        <div class="aspNetHidden">
+            <input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE"
+                value="PZyD81/ENATaHshiQAKBhkNGPfgqJ3gcEiA45rIsxiB1taFJIezw08z/NWRbyj+nrWTPyPED61PmKLRVJPD+ImfdmlTRwUvkd1yCurjfKRjsug11aRAt+NlMnY/qBVdmFTIQLMWJytGPNuzrVbfbnODFC/Gid9Xsrszb/uWyJB55tEhr8Yr0S+vdBYAaRoL6tMsIg9iafCOvDyTVOHHR7rsPokKDMv4jf95x7xBXEK0dAVJCSkChk9S1Ywp7jaVMhZ/rkcmCfKeJKvRldkpj7yLIq10aUD9ejY4Qlb5T+qfC16Hb0vdXlKgPtwADWrUgtHzUCIsd/R1E15SQ+D2Qtw==" />
+        </div>
+
+        <div class="aspNetHidden">
+
+            <input type="hidden" name="__VIEWSTATEGENERATOR" id="__VIEWSTATEGENERATOR" value="AFEEA4A2" />
+            <input type="hidden" name="__EVENTVALIDATION" id="__EVENTVALIDATION"
+                value="Wdol5YemT3dMwWx5xe9ebMMUyBp36PI8is1m9E3i3ZzAgym3S3gAoGBqa44TQ5zTH8Mm3fycQTp3WO+t8NL5yE926o5CQsVt8JYFLjTtlrZIFePUG/aX5CFFMnJq6XPpCg0+bpGqVQ3XToG/CDm0TQ==" />
+        </div>
+        <div class="ConScreen">
+            <div id="dvConFields" class="ConFields" style="overflow:hidden;">
+                <div
+                    style="padding: 10px;background: #ffffff;overflow: hidden;box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);border-radius: 10px;">
+                    <div id="dvLeft" class="dvLeft">
+                        <div>
+                            <img src="./Logo.jpg" style="width:100%" />
+                        </div>
+                    </div>
+                    <div class="dvRight">
+                        <div id="dvConXacNhan" class="ConXacNhan" style="z-index: 9999 !important;position: sticky;">
+                            <div id="dvConXacNhan_Content">
+                                <div class="TieuDe">ĐĂNG KÝ THAM GIA</div>
+
+                                <div>
+                                    <div class="dvField1">
+                                        <div
+                                            style="text-align: left;padding-left: 5px;margin-bottom: 3px;font-size: 18px;">
+                                            Sales date (Ngày bán hàng) </div>
+                                        <div>
+                                            <select name="slNgayBanHang" id="slNgayBanHang" onchange="LoadPhien()"
+                                                class="MySelect">
+                                                <option value="35">13/08/2025</option>
+                                                <option value="36">14/08/2025</option>
+                                                <option value="37">15/08/2025</option>
+                                                <option value="38">16/08/2025</option>
+                                                <option selected="selected" value="">-- Chọn --</option>
+                                            </select>
+                                        </div>
+                                        <div id="dvGhiChuNgayBanHang"
+                                            style="text-align: left;padding-left: 10px;margin-top: 3px;font-weight: bold;font-style: italic;font-size: 16px;">
+                                        </div>
+                                    </div>
+                                    <div class="dvField1">
+                                        <div
+                                            style="text-align: left;padding-left: 5px;margin-bottom: 3px;font-size: 18px;">
+                                            Session (Phiên)</div>
+                                        <div>
+                                            <select name="slPhien" id="slPhien" class=" MySelect">
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div id="dvFields" style="width: 100%;text-align: left; margin-top:15px">
+                                    <div class="dvField1">
+                                        <div
+                                            style="text-align: left;padding-left: 5px;margin-bottom: 3px;font-size: 18px;">
+                                            Full name (Họ tên)</div>
+                                        <div><input id="txtHoTen" placeholder="" type=" text"
+                                                class="myTextBox txtField1"
+                                                style="border: 1px solid #da253475;color: #121212;background-color: white;"
+                                                autocomplete="off"></div>
+                                    </div>
+                                    <div class="dvField1" style="margin-top: 8px;">
+                                        <div
+                                            style="text-align: left;padding-left: 5px;margin-bottom: 3px;font-size: 18px;">
+                                            Date of birth (Ngày Sinh)</div>
+                                        <table>
+                                            <tr>
+                                                <td>
+                                                    <input id="txtNgaySinh_Ngay" placeholder="Ngày" type="number"
+                                                        class="myTextBox txtField1"
+                                                        style=" border: 1px solid #da253475;color: #121212;background-color: white;width: 80% !important;"
+                                                        autocomplete="off">
+                                    </div>
+                                    </td>
+                                    <td style="padding: 3px;color: #939393;">/</td>
+                                    <td>
+                                        <input id="txtNgaySinh_Thang" placeholder="Tháng" type="number"
+                                            class="myTextBox txtField1"
+                                            style=" border: 1px solid #da253475;color: #121212;background-color: white;width: 80% !important;"
+                                            autocomplete="off">
+                                </div>
+                                </td>
+                                <td style="padding: 3px;color: #939393;">/</td>
+                                <td>
+                                    <input id="txtNgaySinh_Nam" placeholder="Năm" type="number"
+                                        class="myTextBox txtField1"
+                                        style=" border: 1px solid #da253475;color: #121212;background-color: white;width: 80% !important;"
+                                        autocomplete="off">
+                            </div>
+                            </td>
+                            </tr>
+                            </table>
+                        </div>
+                        <div class="dvField1" style="margin-top: 8px;">
+                            <div style="text-align: left;padding-left: 5px;margin-bottom: 3px;font-size: 18px;">Phone
+                                number (Số điện thoại) </div>
+                            <div><input id="txtSoDienThoai" placeholder="" type="text" class="myTextBox txtField1"
+                                    style="border: 1px solid #da253475;color: #121212;background-color: white; autocomplete=off"></div>
+                        </div>
+                        <div class="dvField1" style="margin-top: 8px;">
+                            <div style="text-align: left;padding-left: 5px;margin-bottom: 3px;font-size: 18px;">Email
+                            </div>
+                            <div><input id="txtEmail" placeholder="" type=" text" class="myTextBox txtField1"
+                                    style="border: 1px solid #da253475;color: #121212;background-color: white; autocomplete=off"></div>
+                        </div>
+                        <div class="dvField1" style="margin-top: 8px;">
+                            <div style="text-align: left;padding-left: 5px;margin-bottom: 3px;font-size: 18px;">ID
+                                Card/Passport (CCCD/Hộ chiếu) </div>
+                            <div><input id="txtCCCD" placeholder="" type=" text" class="myTextBox txtField1"
+                                    style="border: 1px solid #da253475;color: #121212;background-color: white; autocomplete=off"></div>
+                        </div>
+                        <div class="dvField1" style="margin-top: 8px;">
+                            <table style="font-size: 17px;line-height: 23px;">
+                                <tr>
+                                    <td>
+                                        <input id="ckbDongY" type="checkbox" style="width:23px; height:23px" />
+                                    </td>
+                                    <td style="font-weight: bold;text-align: left;">
+                                        <div>Tôi đã đọc và đồng ý với <a
+                                                href='https://popmartstt.com/files/HOT_ITEM_T_C_updated_3_Jul.pdf'
+                                                target="_blank" style=" color: #f89d17;">Thể lệ chương trình</a></div>
+                                        <div style="margin-top:4px">I have read and agree to the <a
+                                                href=' https://popmartstt.com/files/HOT_ITEM_T_C_updated_3_Jul.pdf'
+                                                target="_blank" style="color: #f89d17;">Event Terms & Conditions</a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="dvField1" style="margin-top: 8px; text-align:left">
+                            <div id="dvConCaptcha" style="margin-top:10px">
+                                <table style="width:100%">
+                                    <tr>
+                                        <td id="dvCaptcha" style="width:100px;vertical-align: bottom;">
+                                        </td>
+                                        <td style="width: 70px;">
+                                            <div style="text-align:left;margin-top: -10px;">
+                                                <input type="text" id="txtCaptcha" placeholder=" Nhập captcha (*)"
+                                                    class="myTextBox"
+                                                    style="width: 110px!important;border: 1px solid #da253475;"
+                                                    autocomplete="off" />
+                                            </div>
+                                        </td>
+                                        <td style="text-align: left;"><img src='./iconRefresh.png'
+                                                style=' height: 38px;cursor: pointer;margin-top: -3px; margin-left: 5px;'
+                                                onclick='LoadCaptcha()' /></td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="dvDangKyThamDu" style="text-align:center;padding: 10px; margin-top:10px">
+                        <a id="btDangKyThamGia" onclick="DangKyThamDu()" class="MyButton" style="margin-top: 3px;">Đăng
+                            ký </a>
+                    </div>
+                    <div id="dvLoading" style="text-align:center;padding: 10px; margin-top:5px; display:none">
+                        <!-- <img src="./Loading_icon.gif" style="width: 33px;" /> -->
+                    </div>
+                </div>
+                <div id="dvTaoMaQR" style="display:none">
+                    <input id="txtQRCode" type="text" value=" 0000" style="width:80%; display:none" /><br />
+                    <div id="qrcode"></div>
+                    <div style="text-align: center;margin-top:12%">
+                        <a id='qrdl' style="font-weight: bold;color: #4b9f4f;font-size: 17px;" download>Tải mã QR</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+        </div>
+        <div class="form-popup" id="dvThongBao">
+            <div class="form-container" style="background: #ffffff;color: #f94c4c; text-align: center;">
+                <div class="form-container-close">
+                    <img style="width: 19px;cursor: pointer;margin-top: 3px;margin-right: 3px;"
+                        src="iconClose.png" onclick="CloseThongBao()" />
+                </div>
+                <div id="dvNoiDungThongBao"
+                    style="margin-top: 50px; padding: 20px 10px; font-weight: bold; font-size: 18px;"> </div>
+            </div>
+        </div>
+        <div class="form-popup" id="dvTrungThuong">
+            <div id="dvConTrungThuong" class="form-container"
+                style="background-image: -webkit-linear-gradient(57deg, #66c16a 0%, #baa975 100%, rgb(17 164 26) 100%); color: #ffffff; text-align: center;">
+                <div class="form-container-close">
+                    <img src="iConClose.png" class="form-close" style="width:30px; cursor:pointer;opacity : 0.7;"
+                        onclick="closeTrungThuong()" />
+                </div>
+                <div id="dvNoiDungTrungThuong" style="font-weight: bold; font-size: 25px; height: 200px;"> </div>
+            </div>
+        </div>
+        <div class="form-popup" id="dvPopupTraCuu">
+            <div id="dvConPopupTraCuu" class="form-container"
+                style="background-image: -webkit-linear-gradient(57deg, #f3f3f3 0%, #ffffff 100%, rgb(17 164 26) 100%); color: #ffffff; text-align: center;">
+                <div class="form-container-close">
+                    <input class="form-close" value="X" type=" button" onclick="closePopupTraCuu()" />
+                </div>
+                <div id="dvNoiDungPopupTraCuu" style="font-weight: bold; font-size: 25px; height: 200px;">
+                    <table>
+                        <tr>
+                            <td>
+                                <input id="txtSoDienThoai_TraCuu" type="text" class="myTextBox"
+                                    style="padding: 5px 7px; width: 160px; font-size: 18px;"
+                                    placeholder="Số điện thoại" />
+                            </td>
+                            <td>
+                                <input onclick="LoadTraCuu()" id="btTim_TraCuu" type="button" value="Tìm"
+                                    class=" MyButton" />
+                            </td>
+                        </tr>
+                    </table>
+                    <div id="dvThongTinTraCuu"
+                        style="color: #6d6d6d;font-size: 17px;margin-top: 10px;max-height: 250px;overflow: auto;">
+                        Danh sách các mảnh ghép bạn đã nhận được
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+        <div>
+            <div id="dvLoadGif" style="display:none"> </div>
+        </div>
+        <script>
+            function GenQRImage(idPhien, MaThamDu) {
+                var GiaTri = MaThamDu;
+                var NoiDungHienBenDuoi = MaThamDu;
+                $.ajax({
+                    type: "POST",
+                    url: "./DangKy.aspx/GenQRImage",
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    data: "{GiaTri: '" + GiaTri + "',NoiDungHienBenDuoi: '" + NoiDungHienBenDuoi + "'}",
+                    success: function (datas) {
+                        if (datas.d != "") {
+
+                            var urlTaiVe = datas.d;
+
+
+                            document.getElementById('qrdl').href = urlTaiVe;
+
+
+
+
+                            //$("#qrcode").html("<img src='" + datas.d + "' style='width:150px' />");
+                            //$("#dvTaoMaQR").css("display", "");
+
+                            SendEmail(idPhien, MaThamDu);
+                        }
+                    },
+                    failure: function (response) {
+                        //console.log(response.d);
+                    }
+                });
+            }
+            function SendEmail(idPhien, MaThamDu) {
+                var xmlhttp;
+                if (window.XMLHttpRequest) {
+                    // code for IE7+, Firefox, Chrome, Opera, Safari
+                    xmlhttp = new XMLHttpRequest();
+                } else {
+                    // code for IE6, IE5
+                    xmlhttp = new ActiveXObject("Microsoft.XMLHTTP");
+                }
+                xmlhttp.onreadystatechange = function () {
+                    if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                        if (xmlhttp.responseText.trim() == "True") {
+                            //alert("Thành công!");
+                        }
+                    }
+                };
+                xmlhttp.open("GET", "./Ajax.aspx?Action=SendEmail&idPhien=" + idPhien + "&MaThamDu=" + MaThamDu, true);
+                xmlhttp.send();
+            }
+        </script>
+        <script>
+  // Dữ liệu mapping ngày -> danh sách phiên
+  const phienData = {
+    "35": [
+      { value: "3501", text: "Sáng 13/08/2025" },
+      { value: "3502", text: "Chiều 13/08/2025" }
+    ],
+    "36": [
+      { value: "3601", text: "Sáng 14/08/2025" },
+      { value: "3602", text: "Chiều 14/08/2025" }
+    ],
+    "37": [
+      { value: "3701", text: "Sáng 15/08/2025" },
+      { value: "3702", text: "Chiều 15/08/2025" }
+    ],
+    "38": [
+      { value: "3801", text: "Sáng 16/08/2025" },
+      { value: "3802", text: "Chiều 16/08/2025" }
+    ]
+  };
+
+  function renderPhienOptions(dateValue) {
+    const slPhien = document.getElementById("slPhien");
+    if (!slPhien) return;
+
+    // Xóa option cũ
+    slPhien.innerHTML = "";
+
+    // Nếu không chọn ngày
+    if (!dateValue || !phienData[dateValue]) {
+      const opt = document.createElement("option");
+      opt.value = "";
+      opt.textContent = "-- Chọn --";
+      slPhien.appendChild(opt);
+      return;
+    }
+
+    // Render danh sách phiên theo dateValue
+    phienData[dateValue].forEach(item => {
+      const opt = document.createElement("option");
+      opt.value = item.value;
+      opt.textContent = item.text;
+      slPhien.appendChild(opt);
+    });
+  }
+
+  // Gắn vào onchange của #slNgayBanHang
+  document.addEventListener("DOMContentLoaded", () => {
+    const slNgay = document.getElementById("slNgayBanHang");
+    if (slNgay) {
+      slNgay.addEventListener("change", () => {
+        setTimeout(function(){renderPhienOptions(slNgay.value)}, 500)
+      });
+    }
+  });
+</script>
+
+    </form>
+</body>
+
+</html>
